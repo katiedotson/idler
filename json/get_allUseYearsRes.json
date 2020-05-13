@@ -1,0 +1,11 @@
+{
+  "error": null,
+  "status": "OK",
+  "allUseYearsResponse": [
+    { "useYearBeginDate": "2021-05-08", "useYearEndDate": "2022-05-07" },
+    { "useYearBeginDate": "2020-05-08", "useYearEndDate": "2021-05-07" },
+    { "useYearBeginDate": "2019-05-08", "useYearEndDate": "2020-05-07" },
+    { "useYearBeginDate": "2018-05-08", "useYearEndDate": "2019-05-07" },
+    { "useYearBeginDate": "2019-05-08", "useYearEndDate": "2020-05-07" }
+  ]
+}

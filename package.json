@@ -1,0 +1,28 @@
+{
+  "name": "idler",
+  "version": "1.0.0",
+  "description": "A tool for serving JSON responses in a local development environment",
+  "license": "MIT",
+  "scripts": {
+    "prestart": "npm install",
+    "lint": "eslint .",
+    "serve": "node index"
+  },
+  "engines": {
+    "node": ">=8.14",
+    "npm": ">=6.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "prettier": "1.15.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.3"
+  },
+  "optionalDependencies": {}
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/main.css" />
+    <meta name="theme-color" content="#fafafa" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="accordion" id="accordion">
+      <div class="card" v-for="(item, index) in items">
+        <div class="card-header">
+          <h2 class="mb-0">
+            <button
+              class="btn"
+              type="button"
+              v-html="getButtonText(index)"
+              style="font-size: larger; font-family: monospace;"
+              @click="open(index)"
+            ></button>
+          </h2>
+        </div>
+        <div class="collapse" :class="{show : openIndex === index}">
+          <div class="card-body">
+            <div class="container-fluid">
+              <form>
+                <div class="form-group mt-3">
+                  <textarea
+                    disabled="disabled"
+                    class="form-control text-light"
+                    :id="getId(index)"
+                    style="background-color: #373737; font-family: monospace; color: #FCE694;"
+                    :rows="calculateRows(index)"
+                    @keydown="prevDefault(index, $event)"
+                  >{{formatJSON(item.value)}}</textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const accordion = new Vue({
+        el: "#accordion",
+        methods: {
+          open(index) {
+            if (index == this.openIndex) {
+              this.openIndex = null;
+            } else {
+              this.openIndex = index;
+            }
+          },
+          getButtonText(index) {
+            const obj = this.items[index];
+            return `${obj.method} | ${obj.path}`;
+          },
+          getJson() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/get");
+            xhr.onload = () => {
+              this.items = JSON.parse(xhr.responseText);
+            };
+            xhr.send();
+          },
+          prevDefault(index, event) {
+            event.preventDefault();
+          },
+          formatJSON(value) {
+            return JSON.stringify(value, undefined, 4);
+          },
+          calculateRows(index) {
+            const jsonLength = JSON.stringify(this.items[index]).length;
+            switch (true) {
+              case jsonLength <= 1000: {
+                return 10;
+              }
+              case jsonLength >= 1000: {
+                return 50;
+              }
+              default: {
+                return 10;
+              }
+            }
+          },
+          getId(index) {
+            return `_${index}`;
+          },
+        },
+        mounted() {
+          this.getJson();
+        },
+        data: function() {
+          return {
+            items: [],
+            openIndex: null,
+          };
+        },
+      });
+    </script>
+  </body>
+</html>

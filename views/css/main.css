@@ -1,0 +1,13 @@
+.invalid {
+  border: 4px solid pink !important;
+}
+
+.hover-btn {
+  background-color: rgb(55, 55, 55) !important;
+  font-family: monospace !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.hover-btn:hover {
+  background-color: rgb(68, 87, 68) !important;
+}
